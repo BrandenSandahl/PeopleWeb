@@ -38,7 +38,7 @@ public class PeopleWeb {
 
                     HashMap m = new HashMap();
                     m.put("people", peopleList.subList(subStart, subTo)); //put the part of the array to show
-                    m.put("next", ((subStart != (peopleList.size() - 20)) ? subStart + 20 : null));  //adjust next link, hide if we need to.
+                    m.put("next", ((subTo != (peopleList.size())) ? subStart + 20 : null));  //adjust next link, hide if the end of my subList is at the end of the ArrayList
                     m.put("previous", (subStart != 0) ? subStart - 20 : null); //adjust previous link, hide if it's at 0.
 
                     return new ModelAndView(m, "home.html");
@@ -64,10 +64,6 @@ public class PeopleWeb {
 
     }
 
-
-
-
-
     static ArrayList<Person> readFromCsv() throws FileNotFoundException {
         File f = new File("people.csv");
         Scanner s = new Scanner(f);
@@ -81,8 +77,6 @@ public class PeopleWeb {
             Person p = new Person(Integer.parseInt(lineSplit[0]), lineSplit[1], lineSplit[2], lineSplit[3], lineSplit[4], lineSplit[5]);
             peopleList.add(p);
         }
-
         return peopleList;
-
     }
 }

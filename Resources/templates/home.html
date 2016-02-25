@@ -12,13 +12,18 @@
     <div class="peopleList"><a class="people" href="/person?id={{id}}">{{firstName}} {{lastName}} </a><br /> </div> <!-- Need to actually tell the browser where to go after the / -->
     {{/people}}
 
-{{#previous}}
-<a class="nav" href="/?offset={{previous}}">Previous</a>
-{{/previous}}
 
+  <span>
+{{#previous}}
+<a class="nav" id="prev" href="/?offset={{previous}}">Previous</a>
+{{/previous}}
+  </span>
+
+    <span>
 {{#next}}
-<a class="nav" href="/?offset={{next}}">Next</a>
+<a class="nav" id="next" href="/?offset={{next}}">Next</a>
 {{/next}}
+    </span>
 
 </body>
 </html>

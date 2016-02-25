@@ -1,11 +1,9 @@
 .peopleList {
    padding-bottom: 2px;
-
 }
 a.people {
     text-decoration: none;
     color: black;
-
 }
 a.people:hover {
     color:  blue;
@@ -13,6 +11,10 @@ a.people:hover {
 
 a.nav:visited {
     color: blue;
-
 }
+
+
+
+
+
 
