@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link href="home.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <title>Asset List</title>
+</head>
+<body>
+
+    {{#people}}
+    <div class="peopleList"><a class="people" href="/person?id={{id}}">{{firstName}} {{lastName}} </a><br /> </div> <!-- Need to actually tell the browser where to go after the / -->
+    {{/people}}
+
+{{#previous}}
+<a class="nav" href="/?offset={{previous}}">Previous</a>
+{{/previous}}
+
+{{#next}}
+<a class="nav" href="/?offset={{next}}">Next</a>
+{{/next}}
+
+</body>
+</html>
