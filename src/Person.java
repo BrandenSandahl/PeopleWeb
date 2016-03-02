@@ -6,6 +6,8 @@ public class Person {
     private int id;
     private String firstName, lastName, email, country, ip;
 
+    public Person() {
+    }
 
     public Person(int id, String firstName, String lastName, String email, String country, String ip) {
         setId(id);

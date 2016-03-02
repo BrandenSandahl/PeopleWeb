@@ -1,45 +1,139 @@
+
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class PeopleWeb {
 
-    static ArrayList<Person> peopleList = new ArrayList<>();
+   // static ArrayList<Person> peopleList = new ArrayList<>();
+
+    public static void createTables(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        stmt.execute("DROP TABLE IF EXISTS person");
+        stmt.execute("CREATE TABLE IF NOT EXISTS person (person_id IDENTITY, first_name VARCHAR, last_name VARCHAR, email VARCHAR, country VARCHAR, ip varchar)");
+        stmt.close();
+    }
+
+    public static void insertPerson(Connection conn) throws SQLException {
+
+
+    }
+
+    public static int populateDatabase(Connection conn) throws FileNotFoundException, SQLException {
+        int affected = 0;
+        File f = new File("people.csv");
+        Scanner s = new Scanner(f);
+
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO person VALUES (null, ?, ?, ?, ?, ?)");
+        s.nextLine(); //skip a line
+
+        while (s.hasNext()) {
+            String[] lineSplit = s.nextLine().split(",");
+            stmt.setString(1, lineSplit[1]);
+            stmt.setString(2, lineSplit[2]);
+            stmt.setString(3, lineSplit[3]);
+            stmt.setString(4, lineSplit[4]);
+            stmt.setString(5, lineSplit[5]);
+            affected = affected + stmt.executeUpdate();
+        }
+        return affected;
+    }
+
+   public static ArrayList<Person> selectPersons(Connection conn, int offset) throws SQLException {
+       PreparedStatement stmt = conn.prepareStatement("SELECT * FROM person LIMIT 20 OFFSET ? ");
+       stmt.setInt(1, offset);
+       ResultSet results = stmt.executeQuery();
+
+       ArrayList<Person> personList = new ArrayList<>();
+
+       while (results.next()) {
+           int id = results.getInt(1);
+           String firstName = results.getString(2);
+           String lastName = results.getString(3);
+           String email = results.getString(4);
+           String country = results.getString(5);
+           String ip = results.getString(6);
+           Person p = new Person(id, firstName,lastName, email, country, ip);
+           personList.add(p);
+       }
+       return personList;
+   }
+
+//    public static ArrayList<Person> selectPersons(Connection conn) throws SQLException {
+//        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM person ");
+//        ResultSet results = stmt.executeQuery();
+//
+//        ArrayList<Person> personList = new ArrayList<>();
+//
+//        while (results.next()) {
+//            int id = results.getInt(1);
+//            String firstName = results.getString(2);
+//            String lastName = results.getString(3);
+//            String email = results.getString(4);
+//            String country = results.getString(5);
+//            String ip = results.getString(6);
+//            Person p = new Person(id, firstName,lastName, email, country, ip);
+//            personList.add(p);
+//        }
+//        return personList;
+//    }
+
+    public static Person selectPerson(Connection conn, int id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM person WHERE person_id = ?");
+        stmt.setInt(1, id);
+
+        ResultSet results = stmt.executeQuery();
+
+        Person p = new Person();
+
+        if (results.next()) {
+            String firstName = results.getString(2);
+            String lastName = results.getString(3);
+            String email = results.getString(4);
+            String country = results.getString(5);
+            String ip = results.getString(6);
+            p = new Person(id, firstName,lastName, email, country, ip);
+        }
+        return p;
+    }
 
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, SQLException {
+        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
+        createTables(conn);
+
+        int records = populateDatabase(conn); //populate the database. This returns a int of the amount of records added.
+
         Spark.externalStaticFileLocation("public");
         Spark.init();
-        //read in my file into an ArrayList
-        peopleList = readFromCsv();
+
 
         Spark.get(
                 "/",
                 ((request, response) -> {
                     String nextString = request.queryParams("offset"); //this only sends when user directly interacts with something that causes it to send.
-                    int subStart = 0; //0 if it's nothing else
+
+                    int offset = 0; //0 if it's nothing else
                     if (nextString != null) {   //this starts out null because it's not sending anything until you click one of the two.
-                        subStart = Integer.parseInt(nextString);
-                    }
-                    int subTo = subStart + 20;
-
-                    //this will keep the array from going out of bounds. I'm just constraining the sub method to the size of the array
-                    if (subTo > peopleList.size()) {
-                        subTo = peopleList.size();
+                        offset = Integer.parseInt(nextString);
                     }
 
+                    ArrayList<Person> personList = new ArrayList<>(selectPersons(conn,offset));
 
                     HashMap m = new HashMap();
-                    m.put("people", peopleList.subList(subStart, subTo)); //put the part of the array to show
-                    m.put("next", ((subTo != (peopleList.size())) ? subStart + 20 : null));  //adjust next link, hide if the end of my subList is at the end of the ArrayList
-                    m.put("previous", (subStart != 0) ? subStart - 20 : null); //adjust previous link, hide if it's at 0.
+                    m.put("people", personList); //put the part of the array to show
+                    m.put("next", (personList.get(personList.size() - 1).getId() != records) ? offset + 20 : null);
+                    m.put("previous", (personList.get(0).getId() > 1) ? offset - 20 : null );
+                    //m.put("next", ((subTo != (personList.size())) ? subStart + 20 : null));  //adjust next link, hide if the end of my subList is at the end of the ArrayList
+                   // m.put("previous", (subStart != 0) ? subStart - 20 : null); //adjust previous link, hide if it's at 0.
 
                     return new ModelAndView(m, "home.html");
 
@@ -50,11 +144,12 @@ public class PeopleWeb {
         Spark.get(
                 "/person",  //So you have to tell the browser to go here at some point to pick this up.
                 ((request, response) -> {
-                    int id = (Integer.valueOf(request.queryParams("id")) - 1);  //place in the Array
+                    int id = (Integer.valueOf(request.queryParams("id")));  //place in the Array
 
-                    Person person = peopleList.get(id);
+                    Person p = selectPerson(conn, id);
+
                     HashMap m = new HashMap();
-                    m.put("person", person);
+                    m.put("person", p);
 
                     return new ModelAndView(m, "person.html");
 
@@ -64,19 +159,4 @@ public class PeopleWeb {
 
     }
 
-    static ArrayList<Person> readFromCsv() throws FileNotFoundException {
-        File f = new File("people.csv");
-        Scanner s = new Scanner(f);
-
-        ArrayList<Person> peopleList = new ArrayList<>();
-
-        s.nextLine(); //skip a line
-
-        while (s.hasNext()) {
-            String[] lineSplit = s.nextLine().split(",");
-            Person p = new Person(Integer.parseInt(lineSplit[0]), lineSplit[1], lineSplit[2], lineSplit[3], lineSplit[4], lineSplit[5]);
-            peopleList.add(p);
-        }
-        return peopleList;
-    }
 }
