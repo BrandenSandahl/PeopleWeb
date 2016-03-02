@@ -21,10 +21,6 @@ public class PeopleWeb {
         stmt.close();
     }
 
-    public static void insertPerson(Connection conn) throws SQLException {
-
-
-    }
 
     public static int populateDatabase(Connection conn) throws FileNotFoundException, SQLException {
         int affected = 0;
@@ -43,6 +39,7 @@ public class PeopleWeb {
             stmt.setString(5, lineSplit[5]);
             affected = affected + stmt.executeUpdate();
         }
+        stmt.close();
         return affected;
     }
 
@@ -63,27 +60,10 @@ public class PeopleWeb {
            Person p = new Person(id, firstName,lastName, email, country, ip);
            personList.add(p);
        }
+       stmt.close();
        return personList;
    }
 
-//    public static ArrayList<Person> selectPersons(Connection conn) throws SQLException {
-//        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM person ");
-//        ResultSet results = stmt.executeQuery();
-//
-//        ArrayList<Person> personList = new ArrayList<>();
-//
-//        while (results.next()) {
-//            int id = results.getInt(1);
-//            String firstName = results.getString(2);
-//            String lastName = results.getString(3);
-//            String email = results.getString(4);
-//            String country = results.getString(5);
-//            String ip = results.getString(6);
-//            Person p = new Person(id, firstName,lastName, email, country, ip);
-//            personList.add(p);
-//        }
-//        return personList;
-//    }
 
     public static Person selectPerson(Connection conn, int id) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM person WHERE person_id = ?");
@@ -101,7 +81,16 @@ public class PeopleWeb {
             String ip = results.getString(6);
             p = new Person(id, firstName,lastName, email, country, ip);
         }
+        stmt.close();
         return p;
+    }
+
+    public static int getSize(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        int size = 0;
+        ResultSet results =  stmt.executeQuery("SELECT COUNT(person_id) AS size FROM person");
+        if (results.next()) size = results.getInt("size");
+        return size;
     }
 
 
@@ -130,10 +119,8 @@ public class PeopleWeb {
 
                     HashMap m = new HashMap();
                     m.put("people", personList); //put the part of the array to show
-                    m.put("next", (personList.get(personList.size() - 1).getId() != records) ? offset + 20 : null);
+                    m.put("next", (personList.get(personList.size() - 1).getId() != getSize(conn)) ? offset + 20 : null);
                     m.put("previous", (personList.get(0).getId() > 1) ? offset - 20 : null );
-                    //m.put("next", ((subTo != (personList.size())) ? subStart + 20 : null));  //adjust next link, hide if the end of my subList is at the end of the ArrayList
-                   // m.put("previous", (subStart != 0) ? subStart - 20 : null); //adjust previous link, hide if it's at 0.
 
                     return new ModelAndView(m, "home.html");
 

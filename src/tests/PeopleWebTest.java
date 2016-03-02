@@ -48,6 +48,17 @@ public class PeopleWebTest {
         assertTrue(personList.size() == 20);
     }
 
+    @Test
+    public void testSize() throws SQLException, FileNotFoundException {
+        Connection conn = startConnection();
+
+        PeopleWeb.populateDatabase(conn);
+
+        int size = PeopleWeb.getSize(conn);
+
+        assertTrue(size > 0);
+
+    }
 
 
 }
