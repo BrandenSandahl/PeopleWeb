@@ -37,10 +37,10 @@ public class PeopleWeb {
             stmt.setString(3, lineSplit[3]);
             stmt.setString(4, lineSplit[4]);
             stmt.setString(5, lineSplit[5]);
-            affected = affected + stmt.executeUpdate();
+            affected = affected + stmt.executeUpdate();  //returns 1 each time and adds it.
         }
         stmt.close();
-        return affected;
+        return affected;  //returns the total number of values added to DB
     }
 
    public static ArrayList<Person> selectPersons(Connection conn, int offset) throws SQLException {
@@ -51,14 +51,7 @@ public class PeopleWeb {
        ArrayList<Person> personList = new ArrayList<>();
 
        while (results.next()) {
-           int id = results.getInt(1);
-           String firstName = results.getString(2);
-           String lastName = results.getString(3);
-           String email = results.getString(4);
-           String country = results.getString(5);
-           String ip = results.getString(6);
-           Person p = new Person(id, firstName,lastName, email, country, ip);
-           personList.add(p);
+           personList.add(buildPerson(results));
        }
        stmt.close();
        return personList;
@@ -74,12 +67,7 @@ public class PeopleWeb {
         Person p = new Person();
 
         if (results.next()) {
-            String firstName = results.getString(2);
-            String lastName = results.getString(3);
-            String email = results.getString(4);
-            String country = results.getString(5);
-            String ip = results.getString(6);
-            p = new Person(id, firstName,lastName, email, country, ip);
+            p = buildPerson(results);
         }
         stmt.close();
         return p;
@@ -93,6 +81,16 @@ public class PeopleWeb {
         return size;
     }
 
+    public static Person buildPerson(ResultSet results) throws SQLException {
+        int id = results.getInt(1);
+        String firstName = results.getString(2);
+        String lastName = results.getString(3);
+        String email = results.getString(4);
+        String country = results.getString(5);
+        String ip = results.getString(6);
+        Person p = new Person(id, firstName, lastName, email, country, ip);
+        return p;
+    }
 
 
     public static void main(String[] args) throws FileNotFoundException, SQLException {
@@ -118,6 +116,27 @@ public class PeopleWeb {
                     ArrayList<Person> personList = new ArrayList<>(selectPersons(conn,offset));
 
                     HashMap m = new HashMap();
+
+//                    double a = Math.round(getSize(conn) / 20);
+//                    double b = ((double)offset/(double)getSize(conn));
+//                    double c = a * b;
+//                    c = Math.round(c);
+
+                    //this is some math that gets the current page number. I don't know really know how this i working, so don't ask.
+                    double pageCurrent = ((getSize(conn)/20) * (double)offset/(double)getSize(conn));  //ugh. Math.
+                    pageCurrent = Math.round(pageCurrent);
+
+                    //math for total number of pages. This sucks. This really sucks.
+                   int a = 0;
+                    if ((double)getSize(conn)/20 != Math.round(getSize(conn)/20)) {
+                        a = (getSize(conn)/20 + 1);
+                    } else {
+                       a = getSize(conn)/20;
+                    }
+
+
+                    m.put("pageCurrent", ((int)(pageCurrent) + 1));
+                    m.put("pageMax", a);
                     m.put("people", personList); //put the part of the array to show
                     m.put("next", (personList.get(personList.size() - 1).getId() != getSize(conn)) ? offset + 20 : null);
                     m.put("previous", (personList.get(0).getId() > 1) ? offset - 20 : null );
