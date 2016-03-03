@@ -4,6 +4,7 @@
     <list default="true" id="fa8e00f2-8059-407b-850d-5912e6d68953" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PeopleWeb/PeopleWeb.class" afterPath="$PROJECT_DIR$/out/production/PeopleWeb/PeopleWeb.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PeopleWeb/templates/home.html" afterPath="$PROJECT_DIR$/out/production/PeopleWeb/templates/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PeopleWeb.java" afterPath="$PROJECT_DIR$/src/PeopleWeb.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tests/PeopleWebTest.java" afterPath="$PROJECT_DIR$/src/tests/PeopleWebTest.java" />
     </list>
@@ -30,8 +31,8 @@
       <file leaf-file-name="PeopleWeb.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PeopleWeb.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.4527163">
-              <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+            <state vertical-scroll-proportion="-0.54108214">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,7 +44,7 @@
         <entry file="file://$PROJECT_DIR$/src/tests/PeopleWebTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="27" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="27" />
+              <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -74,8 +75,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -133,8 +134,8 @@
         <option value="$PROJECT_DIR$/people.csv" />
         <option value="$PROJECT_DIR$/Resources/templates/person.html" />
         <option value="$PROJECT_DIR$/public/home.css" />
-        <option value="$PROJECT_DIR$/Resources/templates/home.html" />
         <option value="$PROJECT_DIR$/src/Person.java" />
+        <option value="$PROJECT_DIR$/Resources/templates/home.html" />
         <option value="$PROJECT_DIR$/src/tests/PeopleWebTest.java" />
         <option value="$PROJECT_DIR$/src/PeopleWeb.java" />
       </list>
@@ -177,8 +178,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -263,7 +262,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -631,13 +632,28 @@
       <option name="project" value="LOCAL" />
       <updated>1456945958508</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changed the way i retrieve the size of the DB to the way suggested by James Powell, which will solve the issue of adding additional entries into the DB at runtime  (although that is not actually currently possible).">
+      <created>1456962477738</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1456962477738</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Spent WAY too much time working on a page numbering system which still does not entirely work.">
+      <created>1456965981638</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1456965981638</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed (maybe) some of the maths with my page numbering.">
+      <created>1457014157447</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1457014157447</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_PeopleWeb - 2016.03.02 at 13h 02m 34s.xml">
-      <configuration name="All in PeopleWeb" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_PeopleWeb - 2016.03.02 at 13h 07m 26s.xml">
       <configuration name="All in PeopleWeb" configurationId="JUnit" />
     </history-entry>
@@ -659,6 +675,9 @@
     <history-entry file="All_in_PeopleWeb - 2016.03.02 at 18h 35m 14s.xml">
       <configuration name="All in PeopleWeb" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="All_in_PeopleWeb - 2016.03.03 at 09h 27m 15s.xml">
+      <configuration name="All in PeopleWeb" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="PeopleWebTest - 2016.03.02 at 13h 24m 52s.xml">
       <configuration name="PeopleWebTest" configurationId="JUnit" />
     </history-entry>
@@ -676,7 +695,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="873" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -685,7 +704,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32522407" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25224072" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32522407" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -708,11 +727,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Everything updated and works as it did before." />
-    <option name="LAST_COMMIT_MESSAGE" value="Everything updated and works as it did before." />
+    <MESSAGE value="Changed the way i retrieve the size of the DB to the way suggested by James Powell, which will solve the issue of adding additional entries into the DB at runtime  (although that is not actually currently possible)." />
+    <MESSAGE value="Spent WAY too much time working on a page numbering system which still does not entirely work." />
+    <MESSAGE value="Fixed (maybe) some of the maths with my page numbering." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed (maybe) some of the maths with my page numbering." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="10" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -721,6 +743,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PeopleWeb.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1109,28 +1139,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/PeopleWebTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="27" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="27" />
+          <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PeopleWeb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.4527163">
-          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+        <state vertical-scroll-proportion="-0.54108214">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
