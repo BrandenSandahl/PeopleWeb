@@ -117,24 +117,26 @@ public class PeopleWeb {
                     HashMap m = new HashMap();
 
 
-                    //this is some maths that gets the current page number. I don't know really know how this is working, so don't ask.
+                    //this is some maths that gets the current page number. I don't know really know how this is working, so don't ask. I just kept doing things until it worked.
                     double pageCurrent = ((getSize(conn)/20) * (double)offset/(double)getSize(conn));  //ugh. Math.
                     pageCurrent = Math.round(pageCurrent);
 
                     //math for total number of pages. This sucks. This really sucks.
-                   int a = 0;
-                    if ((double)getSize(conn)/20 != Math.round(getSize(conn)/20)) {
-                        a = (getSize(conn)/20 + 1);
+                    //this gets really tricky becayse of the way numbers are stored and rounding and the such.
+                   int pageMax = 0;
+                    if ((double)getSize(conn)/20 != Math.round(getSize(conn)/20)) {  //if the total amount in DB / the amount to show per page in exact numbers is != total in whole numbers i need to add a page on b/c we actually have one more page
+                        pageMax = (getSize(conn)/20 + 1);
                     } else {
-                       a = getSize(conn)/20;
+                       pageMax = getSize(conn)/20;
                     }
 
 
-                    m.put("pageCurrent", ((int)(pageCurrent) + 1));
-                    m.put("pageMax", a);
+                    m.put("pageCurrent", ((int)(pageCurrent) + 1)); //set the current page we are on
+                    m.put("pageMax", pageMax); //show the max number of pages possible.
                     m.put("people", personList); //put the part of the array to show
-                    m.put("next", (personList.get(personList.size() - 1).getId() != getSize(conn)) ? offset + 20 : null);
-                    m.put("previous", (personList.get(0).getId() > 1) ? offset - 20 : null );
+                    //show or hide the next and prev button and at same time set the offsets
+                    m.put("next", (personList.get(personList.size() - 1).getId() != getSize(conn)) ? offset + 20 : null);  //get the last entry in the list and see if the id is the same as the last entry in the DB, if it is we are at the end
+                    m.put("previous", (personList.get(0).getId() > 1) ? offset - 20 : null ); //see if we are at the begging of the DB
 
                     return new ModelAndView(m, "home.html");
 
