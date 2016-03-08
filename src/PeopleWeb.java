@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class PeopleWeb {
 
-   // static ArrayList<Person> peopleList = new ArrayList<>();
 
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
@@ -117,12 +116,8 @@ public class PeopleWeb {
 
                     HashMap m = new HashMap();
 
-//                    double a = Math.round(getSize(conn) / 20);
-//                    double b = ((double)offset/(double)getSize(conn));
-//                    double c = a * b;
-//                    c = Math.round(c);
 
-                    //this is some math that gets the current page number. I don't know really know how this i working, so don't ask.
+                    //this is some maths that gets the current page number. I don't know really know how this is working, so don't ask.
                     double pageCurrent = ((getSize(conn)/20) * (double)offset/(double)getSize(conn));  //ugh. Math.
                     pageCurrent = Math.round(pageCurrent);
 

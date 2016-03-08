@@ -1,0 +1,22 @@
+2016-03-02 12:59:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PERSON VALUES[*] (PERSON_ID IDENTITY, FIRST_NAME VARCHAR, LAST_NAME VARCHAR, EMAIL VARCHAR, COUNTRY VARCHAR, IP VARCHAR) "; SQL statement:
+CREATE TABLE IF NOT EXISTS person VALUES (person_id IDENTITY, first_name VARCHAR, last_name VARCHAR, email VARCHAR, country VARCHAR, ip varchar) [42000-191]
+2016-03-02 13:01:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PERSON VALUES[*](PERSON_ID IDENTITY, FIRST_NAME VARCHAR, LAST_NAME VARCHAR, EMAIL VARCHAR, COUNTRY VARCHAR, IP VARCHAR) "; SQL statement:
+CREATE TABLE IF NOT EXISTS person VALUES(person_id IDENTITY, first_name VARCHAR, last_name VARCHAR, email VARCHAR, country VARCHAR, ip varchar) [42000-191]
+2016-03-02 13:02:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PERSON VALUES[*](PERSON_ID IDENTITY, FIRST_NAME VARCHAR, LAST_NAME VARCHAR, EMAIL VARCHAR, COUNTRY VARCHAR, IP VARCHAR) "; SQL statement:
+CREATE TABLE IF NOT EXISTS person VALUES(person_id IDENTITY, first_name VARCHAR, last_name VARCHAR, email VARCHAR, country VARCHAR, ip varchar) [42000-191]
+2016-03-02 13:22:19 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM PERSON LIMIT OFFSET[*] = ? "; expected "NOT, EXISTS, INTERSECTS, SELECT, FROM"; SQL statement:
+SELECT * FROM person LIMIT OFFSET = ? [42001-191]
+2016-03-02 13:23:20 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM PERSON LIMIT 20 OFFSET =[*] ? "; expected "NOT, EXISTS, INTERSECTS"; SQL statement:
+SELECT * FROM person LIMIT 20 OFFSET = ? [42001-191]
+2016-03-02 13:24:51 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM PERSON LIMIT 20 OFFSET =[*] ?  "; expected "NOT, EXISTS, INTERSECTS"; SQL statement:
+SELECT * FROM person LIMIT 20 offset = ?  [42001-191]
+2016-03-02 18:30:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-191]
+2016-03-02 18:30:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-191]

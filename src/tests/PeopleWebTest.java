@@ -34,7 +34,11 @@ public class PeopleWebTest {
 
         int affected = PeopleWeb.populateDatabase(conn);
 
+        endConnection(conn);
+
         assertTrue(affected > 1000);
+
+
     }
 
     @Test
@@ -45,7 +49,11 @@ public class PeopleWebTest {
 
         ArrayList<Person> personList = new ArrayList<>(PeopleWeb.selectPersons(conn, 20));
 
+        endConnection(conn);
+
         assertTrue(personList.size() == 20);
+
+
     }
 
     @Test
@@ -56,7 +64,11 @@ public class PeopleWebTest {
 
         int size = PeopleWeb.getSize(conn);
 
+        endConnection(conn);
+
         assertTrue(size > 0);
+
+
 
     }
 
